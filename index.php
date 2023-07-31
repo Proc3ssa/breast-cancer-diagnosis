@@ -59,7 +59,7 @@ if(isset($_POST['contact'])){
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Breast cancer diagnosis</title>
+  <title>Cancer diagnosis</title>
 
 
   <!-- bootstrap core css -->
@@ -149,13 +149,13 @@ if(isset($_POST['contact'])){
                 </ul>
               </div>
               <div class="quote_btn-container">
-                <a href="">
+                <a href="signin.html">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   <span>
                     Login
                   </span>
                 </a>
-                <a href="">
+                <a href="./patient/signup.php">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   <span>
                     Sign Up

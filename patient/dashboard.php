@@ -1,3 +1,25 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['patient'])){
+    header('location:signin.php');
+}
+else{
+    $patient = $_SESSION['patient'];
+    include '../connection.php';
+    $SELECT = "SELECT *FROM patient where email = '$patient'";
+    $QUERY = mysqli_query($connection, $SELECT);
+    $res = mysqli_fetch_assoc($QUERY);
+
+    function convert($date):string{
+
+        $new_date = date("d F, Y", strtotime($date));
+    
+       return $new_date;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +34,11 @@
                 <div class="image">
                     <img src="../images/avatar.png" alt="pateint">
                 </div>
-                <h3>Patient</h3>
+                <h3><?php echo $res['firstname'] ?></h3>
             </div>
 
             <div class="menu">
-                <a href=""><div class="menu-item current">My Health</div></a>
+                <a href="#"><div class="menu-item current">My Health</div></a>
                 <a href=""><div class="menu-item">Diagnoses</div></a>
                 <a href=""><div class="menu-item">Appointments</div></a>
             </div>
@@ -27,21 +49,21 @@
 
     <div class="main">
        <div class="date">
-        <b>Sunday, 62nd April, 2034</b>
+        <b><?php echo convert(date('d-m-Y'))?></b>
        </div>
 
        <div class="data">
         <div class="dat blood">
             <h1 style="color: red;">Blood Group</h1>
             <hr>
-            <h1 class="bld">A+</h1>
+            <h1 class="bld"><?php echo $res['bloodgroup'] ?></h1>
         </div>
 
         <div class="dat genotype">
 
             <h1 style="color: #21C375;">Genotype</h1>
             <hr>
-            <h1 class="gen">AA</h1>
+            <h1 class="gen"><?php echo $res['genotype'] ?></h1>
         </div>
 
         <div class="dat bloodpressure">

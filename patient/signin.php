@@ -1,3 +1,30 @@
+
+<?php
+if(isset($_POST['signin'])){
+  include "../connection.php";
+
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $SELECT = "SELECT *FROM patient where email = '$email'and password = '$password'";
+
+  $query = mysqli_query($connection, $SELECT);
+
+  if($query -> num_rows == 0){
+    echo '
+    <script>
+    alert("Error:incorrect email or password");
+    </script>
+    ';
+  }
+
+  else{
+    session_start();
+    $_SESSION['patient'] = $email;
+    header("location:dashboard.php");
+  }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -12,11 +39,11 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Mico</title>
+  <title>Signin | Cancer Diagnosis</title>
 
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -25,15 +52,15 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="../css/font-awesome.min.css" rel="stylesheet" />
   <!-- nice select -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
   <!-- datepicker -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <link href="../css/responsive.css" rel="stylesheet" />
 
 </head>
 
@@ -53,17 +80,17 @@
       <div class="row">
         <div class="col-md-7">
           <div class="form_container">
-            <form action="">
+            <form action="signin.php" method="POST">
              
               <div>
-                <input type="email" placeholder="Email" />
+                <input type="email" placeholder="Email" name="email" required/>
               </div>
               <div>
-                <input type="password" placeholder="Password" />
+                <input type="password" name="password" placeholder="Password" required/>
               </div>
              
               <div class="btn_box">
-                <button type="submit">
+                <button type="submit" name="signin">
                   LOGIN
                 </button>
               </div>
