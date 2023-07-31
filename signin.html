@@ -8,22 +8,33 @@
 <body>
 
 
-<h1>Signin <span>Cancer Diagnosis System</span></h1>
+<h1>Signin | <span>Cancer Diagnosis System</span></h1>
         <h3>Signin as</h3>
     <main>
 
         
-
+        <a href="doc/index.php">
         <div class="doc">
             <div class="image">
-                <img src="./images/doctor.svg" alt="doc">
+                <img src="./images/doctor.svg" width="100" alt="doc">
             </div>
 
             <h1>Doctor</h1>
 
         </div>
-        <div></div>
+        </a>
+
+        <!-- patient -->
         
+        <a href="patient/signin.php"> <div class="patient">
+            <div class="image">
+                <img src="./images/patient.svg" width="100" alt="doc">
+            </div>
+
+            <h1>Patient</h1>
+
+        </div>
+    </a>
     </main>
 
 
@@ -36,16 +47,45 @@
             color: #21C375;
         }
         main{
-            width:80%;
+            margin-top: 60px;
+            width:50%;
             display: flex;
-            justify-content: center;
+            justify-content:space-around;
             align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        a{
+            text-decoration: none;
         }
 
         .doc{
             border:1px solid #21C375;
             border-radius:10px;
-            width:20px;
+            width:200px;
+            padding-top: 10px;
+        }
+
+        .patient{
+            border:1px solid #21C375;
+            border-radius:10px;
+            width:200px;
+            padding-top: 10px;
+        }
+
+        .patient:hover{
+            background-color: black;
+        }
+
+        .doc:hover{
+            background-color: #21C375;
+            
+        }
+        .doc h1:hover{
+            color:white;
+        }
+        span{
+            color:black;
         }
     </style>
     
