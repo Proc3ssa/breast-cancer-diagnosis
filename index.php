@@ -1,3 +1,50 @@
+<?php
+include 'connection.php';
+
+if(isset($_POST['appt'])){
+  $name = $_POST['patient'];
+  $doctor = $_POST['doctor'];
+  $department = $_POST['department'];
+  $tel = $_POST['tel'];
+  $symptoms = $_POST['symptoms'];
+  $date = $_POST['date'];
+
+  $INSERT = "INSERT INTO appointments values('$name','$doctor','$department','$tel','$symptoms', '$date')";
+
+  if(mysqli_query($connection, $INSERT)){
+      echo '
+      <script>alert("appointment made")</script>
+      ';
+  }
+  else{
+     echo '
+      <script>alert("something went wrong try again")</script>
+      ';
+  }
+}
+
+//contact
+
+if(isset($_POST['contact'])){
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $tel = $_POST['tel'];
+  $message = $_POST['message'];
+
+  $INSERT = "INSERT INTO contacts values('$name','$email','$tel','$message')";
+   if(mysqli_query($connection, $INSERT)){
+      echo '
+      <script>alert("Message sent")</script>
+      ';
+  }
+  else{
+     echo '
+      <script>alert("something went wrong try again")</script>
+      ';
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -144,15 +191,15 @@
                       </button>
                     </div>
                     <h1>
-                      Mico <br>
+                       Cancer diagnosis <br>
                       <span>
-                        Hospital
+                        system
                       </span>
                     </h1>
                     <p>
-                      when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+                     Diagnose patients with breast  cancer and prostate cancer with the help of Artificial Intelligene. 
                     </p>
-                    <a href="">
+                    <a href="index.php#contact">
                       Contact Us
                     </a>
                   </div>
@@ -176,22 +223,22 @@
                       </button>
                     </div>
                     <h1>
-                      Mico <br>
+                    Breast Cancer  <br>
                       <span>
-                        Hospital
+                        Diagnosis
                       </span>
                     </h1>
                     <p>
-                      when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+                    With the help of our modern day diagnosis sytem and artifial intelligence, we are able diagnose breast cancer and recommend the best tratment options. 
                     </p>
-                    <a href="">
+                    <a href="index.php#contact">
                       Contact Us
                     </a>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="img-box">
-                    <img src="images/slider-img.jpg" alt="">
+                    <img src="images/BRCA_breast_cancer-1024x683.png" alt="">
                   </div>
                 </div>
               </div>
@@ -208,22 +255,22 @@
                       </button>
                     </div>
                     <h1>
-                      Mico <br>
+                      Prostate Cancer <br>
                       <span>
-                        Hospital
+                        Diagnosis
                       </span>
                     </h1>
                     <p>
-                      when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+                    With the help of our modern day diagnosis sytem and artifial intelligence, we are able diagnose prostate cancer and recommend the best tratment options. 
                     </p>
-                    <a href="">
+                    <a href="index.php#contact">
                       Contact Us
                     </a>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="img-box">
-                    <img src="images/slider-img.jpg" alt="">
+                    <img src="images/prostate.png" alt="protate image">
                   </div>
                 </div>
               </div>
@@ -253,45 +300,45 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <form>
+          <form action="#" method="post">
             <h4>
               BOOK <span>APPOINTMENT</span>
             </h4>
             <div class="form-row ">
               <div class="form-group col-lg-4">
                 <label for="inputPatientName">Patient Name </label>
-                <input type="text" class="form-control" id="inputPatientName" placeholder="">
+                <input type="text" class="form-control" id="inputPatientName" placeholder="" name="patient" required>
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputDoctorName">Doctor's Name</label>
-                <select name="" class="form-control wide" id="inputDoctorName">
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
+                <select name="doctor" class="form-control wide" id="inputDoctorName" required>
+                  <option >--select--- </option>
+                  <option value="Dr. Faisal Halid " required>Dr. Faisal Halid </option>
+                  <option value="Dr. Faisal Halid " required>Scott </option>
                 </select>
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputDepartmentName">Department's Name</label>
-                <select name="" class="form-control wide" id="inputDepartmentName">
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
-                  <option value="Normal distribution ">Normal distribution </option>
+                <select name="department" class="form-control wide" id="inputDepartmentName" required>
+                <option >--select--- </option>
+                  <option value="Breast Cancer " required>Breast Cancer </option>
+                  <option value="Prostate Cancer " required>Prostate Cancer </option>
                 </select>
               </div>
             </div>
             <div class="form-row ">
               <div class="form-group col-lg-4">
                 <label for="inputPhone">Phone Number</label>
-                <input type="number" class="form-control" id="inputPhone" placeholder="XXXXXXXXXX">
+                <input type="number" class="form-control" id="inputPhone" placeholder="XXXXXXXXXX" name="tel" required>
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputSymptoms">Symptoms</label>
-                <input type="text" class="form-control" id="inputSymptoms" placeholder="">
+                <input type="text" class="form-control" id="inputSymptoms" placeholder="just type one" name="symptoms" required>
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputDate">Choose Date </label>
-                <div class="input-group date" id="inputDate" data-date-format="mm-dd-yyyy">
-                  <input type="text" class="form-control" readonly>
+                <div class="input-group date" id="inputDate" data-date-format="dd-mm-yyyy" name="date">
+                  <input type="date" class="form-control" name="date" required>
                   <span class="input-group-addon date_icon">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                   </span>
@@ -299,7 +346,7 @@
               </div>
             </div>
             <div class="btn-box">
-              <button type="submit" class="btn ">Submit Now</button>
+              <button type="submit" class="btn" name="appt">Submit Now</button>
             </div>
           </form>
         </div>
@@ -325,11 +372,11 @@
           <div class="detail-box">
             <div class="heading_container">
               <h2>
-                About <span>Hospital</span>
+                About <span>Treatments</span>
               </h2>
             </div>
             <p>
-              has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors
+             We have Highly qualified nurses and Doctors who takes good care of our patients, and with the help of Artificial Intelligence we are able to diagnose and recommend treatments for our patients withing minuites. 
             </p>
             <a href="">
               Read More
@@ -356,42 +403,8 @@
         </h2>
       </div>
       <div class="row">
-        <div class="col-md-6 col-lg-3">
-          <div class="box ">
-            <div class="img-box">
-              <img src="images/t1.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h4>
-                Nephrologist Care
-              </h4>
-              <p>
-                alteration in some form, by injected humour, or randomised words which don't look even slightly e sure there isn't anything
-              </p>
-              <a href="">
-                Read More
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="box ">
-            <div class="img-box">
-              <img src="images/t2.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h4>
-                Eye Care
-              </h4>
-              <p>
-                alteration in some form, by injected humour, or randomised words which don't look even slightly e sure there isn't anything
-              </p>
-              <a href="">
-                Read More
-              </a>
-            </div>
-          </div>
-        </div>
+       
+        
         <div class="col-md-6 col-lg-3">
           <div class="box ">
             <div class="img-box">
@@ -399,10 +412,10 @@
             </div>
             <div class="detail-box">
               <h4>
-                Pediatrician Clinic
+                Breast Cancer
               </h4>
               <p>
-                alteration in some form, by injected humour, or randomised words which don't look even slightly e sure there isn't anything
+               With the help of our modern day diagnosis sytem and artifial intelligence, we are able diagnose breast cancer and recommend the best tratment options. 
               </p>
               <a href="">
                 Read More
@@ -417,10 +430,10 @@
             </div>
             <div class="detail-box">
               <h4>
-                Parental Care
+                Prostate Cancer
               </h4>
               <p>
-                alteration in some form, by injected humour, or randomised words which don't look even slightly e sure there isn't anything
+               With the help of our modern day diagnosis sytem and artifial intelligence, we are able diagnose prostate cancer and recommend the best tratment options. 
               </p>
               <a href="">
                 Read More
@@ -452,7 +465,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Hennry
+                  Dr. Agnes Mensah
                 </h5>
                 <h6>
                   MBBS
@@ -481,7 +494,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Jenni
+                  Dr. Firdaus Mahmoud
                 </h5>
                 <h6>
                   MBBS
@@ -510,7 +523,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Morco
+                  Dr. Faisal Dene
                 </h5>
                 <h6>
                   MBBS
@@ -557,16 +570,16 @@
               <div class="client_info">
                 <div class="client_name">
                   <h5>
-                    Morijorch
+                    Sarah
                   </h5>
                   <h6>
-                    Default model text
+                    Breast Cancer Patient
                   </h6>
                 </div>
                 <i class="fa fa-quote-left" aria-hidden="true"></i>
               </div>
               <p>
-                editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various
+              Hi, I'm Sarah, a breast cancer patient. This journey hasn't been easy, but with the support of my amazing healthcare team, family, and friends, I've found strength I never knew I had. Each day brings me closer to healing, and I want others facing this battle to know that they are not alone. Hold onto hope, embrace love, and remember, together, we can overcome anything. Stay strong! - Sarah.
               </p>
             </div>
           </div>
@@ -575,16 +588,16 @@
               <div class="client_info">
                 <div class="client_name">
                   <h5>
-                    Rochak
+                    John
                   </h5>
                   <h6>
-                    Default model text
+                    Prostate Cancer Patient
                   </h6>
                 </div>
                 <i class="fa fa-quote-left" aria-hidden="true"></i>
               </div>
               <p>
-                Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+              I'm John, a prostate cancer patient. The diagnosis was tough, but my healthcare team has been incredible. With their expertise and support from loved ones, I've discovered a strength I didn't know I had. To all facing prostate cancer, know you're not alone. Embrace the journey, stay positive, and believe in your ability to overcome. We're in this together! - John.
               </p>
             </div>
           </div>
@@ -593,16 +606,16 @@
               <div class="client_info">
                 <div class="client_name">
                   <h5>
-                    Brad Johns
+                  Michael
                   </h5>
                   <h6>
-                    Default model text
+                  Prostate Cancer Patient
                   </h6>
                 </div>
                 <i class="fa fa-quote-left" aria-hidden="true"></i>
               </div>
               <p>
-                Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy, editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various
+              Greetings, I'm Michael, a prostate cancer patient. When I received the diagnosis, I felt anxious and uncertain, but my medical team's care has been exceptional. With their expertise and the unwavering support of my loved ones, I've found the courage to confront this challenge. To all those battling prostate cancer, remember your strength. Embrace the love around you, cherish each day, and stay positive. Together, we can conquer this! - Michael.
               </p>
             </div>
           </div>
@@ -624,7 +637,7 @@
 
   <!-- contact section -->
   <section class="contact_section layout_padding-bottom">
-    <div class="container">
+    <div class="container" id="contact">
       <div class="heading_container">
         <h2>
           Get In Touch
@@ -633,21 +646,21 @@
       <div class="row">
         <div class="col-md-7">
           <div class="form_container">
-            <form action="">
+            <form action="#" method="post">
               <div>
-                <input type="text" placeholder="Full Name" />
+                <input type="text" placeholder="Full Name"  name="name" required />
               </div>
               <div>
-                <input type="email" placeholder="Email" />
+                <input type="email" placeholder="Email" name="email" required/>
               </div>
               <div>
-                <input type="text" placeholder="Phone Number" />
+                <input type="text" placeholder="Phone Number" name="tel" required />
               </div>
               <div>
-                <input type="text" class="message-box" placeholder="Message" />
+                <input type="text" class="message-box" placeholder="Message" name="message" maxlength="500" required/>
               </div>
               <div class="btn_box">
-                <button>
+                <button type="submit" name="contact">
                   SEND
                 </button>
               </div>
@@ -674,7 +687,7 @@
           </a>
         </div>
         <div class="info_form">
-          <form action="">
+          <form action="#" method="post">
             <input type="email" placeholder="Your email">
             <button>
               Subscribe
@@ -810,10 +823,7 @@
   <!-- footer section -->
   <footer class="footer_section">
     <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
-      </p>
+      
     </div>
   </footer>
   <!-- footer section -->
