@@ -3,6 +3,13 @@
 if(isset($_POST['submit'])){
 	include '../connection.php';
 
+	$email = $_POST['email'];
+	$SELECT = "SELECT * FROM patient WHERE email = '$email'";
+
+	if(mysqli_query($connection, $SELECT) -> num_rows == 0){
+	
+		
+
 	$firstname = $_POST['name'];
 	$lastname = $_POST['lname'];
 	$password = $_POST['pass'];
@@ -11,25 +18,35 @@ if(isset($_POST['submit'])){
 	$genotype = $_POST['geno'];
 	$bloodgroup = $_POST['blood'];
 	$number = $_POST['number'];
-	$email = $_POST['email'];
+	
 
 	$INSERT = "INSERT INTO patient VALUES('$firstname','$lastname', '$password','$dob','$gender','$genotype','$bloodgroup','$number','$email')";
 
 	$sql=mysqli_query($connection, $INSERT);
 
 	if($sql){
+		
+		header("refresh:1;url=signin.php");
+		
 		echo '
 		<script>alert("New account created successfully")</script>
 		';
 	}
 
 	else{
-		echo '
-		<script>alert("error: try again")</script>
-		';
+		// echo '
+		// <script>alert("error: try again")</script>
+		// ';
+
+		echo $INSERT;
 	}
 
-	
+	}
+	else{
+		echo '
+		<script>alert("Email has already been taken")</script>
+		';
+	}
 }
 
 ?>

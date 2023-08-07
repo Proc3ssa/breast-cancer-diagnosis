@@ -1,3 +1,30 @@
+<?php
+if(isset($_POST['signin'])){
+  include "../connection.php";
+
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $SELECT = "SELECT *FROM doctors where email = '$email'and password = '$password'";
+
+  $query = mysqli_query($connection, $SELECT);
+
+  if($query -> num_rows == 0){
+    echo '
+    <script>
+    alert("Error:incorrect email or password");
+    </script>
+    ';
+  }
+
+  else{
+    session_start();
+    $_SESSION['doctor'] = $email;
+    header("location:dashboard.php");
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -46,7 +73,7 @@
   <!-- contact section -->
   <section class="contact_section layout_padding-bottom" id="section1">
     <div class="container">
-      <div class="error"><p>Wrong email or password</p> <button class="button" onclick="vanish()">x</button></div>
+      
       <div class="heading_container">
         <h2>
           Sign In <span class="myspan">-Doctor</span>
@@ -58,14 +85,14 @@
             <form action="">
              
               <div>
-                <input type="email" placeholder="Email" />
+                <input type="email" placeholder="Email" name="email" required />
               </div>
               <div>
-                <input type="password" placeholder="Password" />
+                <input type="password" placeholder="Password" name="password" required/>
               </div>
              
               <div class="btn_box">
-                <button type="submit">
+                <button type="submit" name="signin">
                   LOGIN
                 </button>
               </div>
