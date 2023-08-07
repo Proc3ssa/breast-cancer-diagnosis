@@ -2,19 +2,23 @@
 include 'connection.php';
 
 if(isset($_POST['appt'])){
-  $name = $_POST['patient'];
+  $aptid = date("dmYsi");
+  $email = $_POST['patient'];
   $doctor = $_POST['doctor'];
   $department = $_POST['department'];
   $tel = $_POST['tel'];
   $symptoms = $_POST['symptoms'];
   $date = $_POST['date'];
+  $time = $_POST['time'];
 
-  $INSERT = "INSERT INTO appointments values('$name','$doctor','$department','$tel','$symptoms', '$date')";
+  $INSERT = "INSERT INTO appointments values('$aptid','$doctor','$department','$tel','$symptoms','$date','$email','$time')";
 
   if(mysqli_query($connection, $INSERT)){
       echo '
       <script>alert("appointment made")</script>
       ';
+
+      header("refresh:1;url=patient/appointments.php");
   }
   else{
      echo '
@@ -296,7 +300,7 @@ if(isset($_POST['contact'])){
 
   <!-- book section -->
 
-  <section class="book_section layout_padding">
+  <section class="book_section layout_padding" id="appointments">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -306,8 +310,8 @@ if(isset($_POST['contact'])){
             </h4>
             <div class="form-row ">
               <div class="form-group col-lg-4">
-                <label for="inputPatientName">Patient Name </label>
-                <input type="text" class="form-control" id="inputPatientName" placeholder="" name="patient" required>
+                <label for="inputPatientName">Email </label>
+                <input type="email" class="form-control" id="inputPatientName" placeholder="" name="patient" required>
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputDoctorName">Doctor's Name</label>
@@ -332,12 +336,19 @@ if(isset($_POST['contact'])){
                 <input type="number" class="form-control" id="inputPhone" placeholder="XXXXXXXXXX" name="tel" required>
               </div>
               <div class="form-group col-lg-4">
-                <label for="inputSymptoms">Symptoms</label>
+                <label for="inputSymptoms">Reason</label>
                 <input type="text" class="form-control" id="inputSymptoms" placeholder="just type one" name="symptoms" required>
               </div>
+
+              <div class="form-group col-lg-4">
+                <label for="inputSymptoms">Choose Time</label>
+                <input type="time" class="form-control" id="inputSymptoms" placeholder="just type one" name="time" required>
+              </div>
+
               <div class="form-group col-lg-4">
                 <label for="inputDate">Choose Date </label>
                 <div class="input-group date" id="inputDate" data-date-format="dd-mm-yyyy" name="date">
+                  
                   <input type="date" class="form-control" name="date" required>
                   <span class="input-group-addon date_icon">
                     <i class="fa fa-calendar" aria-hidden="true"></i>

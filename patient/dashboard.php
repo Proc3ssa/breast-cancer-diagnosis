@@ -17,6 +17,10 @@ else{
     
        return $new_date;
     }
+
+    $hSELECT = "SELECT *FROM myhealth where patient = '$patient'";
+    $hQUERY = mysqli_query($connection, $hSELECT);
+   
 }
 ?>
 
@@ -26,6 +30,7 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <title>Dashboard</title>
 </head>
 <body>
@@ -39,8 +44,8 @@ else{
 
             <div class="menu">
                 <a href="#"><div class="menu-item current">My Health</div></a>
-                <a href=""><div class="menu-item">Diagnoses</div></a>
-                <a href=""><div class="menu-item">Appointments</div></a>
+                <a href="diagnosis.php"><div class="menu-item">Diagnoses</div></a>
+                <a href="appointments.php"><div class="menu-item">Appointments</div></a>
             </div>
 
     </div>
@@ -76,30 +81,33 @@ else{
        </div>
 
        <!-- x-ray -->
-    <h1 style="margin-left: 10px; margin-top:50px;">X-ray</h1>
+
+      <?php 
+      while( $hres = mysqli_fetch_assoc($hQUERY)){
+        echo '
+      
+    <h1 style="margin-left: 10px; margin-top:50px;">'.$hres["scantype"].'</h1>
        <div class="xray">
         
         <div class="xraybox">
-
+            <img src="scan/'.$hres["scan"].'" alt="xray">
         </div>
 
 
         <div class="xraydata">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam velit aperiam repudiandae, accusantium aut repellendus, quam error consequuntur expedita culpa sequi similique! Sunt inventore rerum voluptatum harum, nemo temporibus quas.</p>
+            <p>'.$hres["result"].'</p>
         </div>
        </div>
 
        <div class="remarks">
-        <h1>Doctor's remarks</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque temporibus eum distinctio numquam. Ullam, aut dolorum accusantium saepe, ab eum praesentium necessitatibus architecto sit, suscipit nihil harum recusandae modi maxime.
-        Quia veritatis iure odit ipsa? Sapiente animi natus earum aut molestiae dolorem et nulla laboriosam ea accusantium, autem cum ipsa. Rerum ea quia porro et nulla, perspiciatis dolor molestias nisi?
-        Iusto repellat eius recusandae doloribus ea vel, placeat necessitatibus nostrum quas, aut aliquid, sunt dicta quod distinctio quibusdam molestiae ratione fuga nam? Tempora ut incidunt qui impedit et itaque ratione.
-        Ducimus dolorem maxime minima voluptatem, nihil mollitia et. Sed ad nulla laudantium, maxime natus recusandae totam. Odio repellendus natus exercitationem, pariatur maxime voluptatibus? Laboriosam debitis mollitia cupiditate officiis rem alias?
-        Modi expedita consequatur dolores optio consequuntur, ratione facere magnam labore provident, recusandae, perferendis sunt deserunt! Eligendi alias perspiciatis aut nesciunt dolores at distinctio sequi officiis, incidunt magnam, eius, vel suscipit!
-       .
+        <h1>Doctors remarks</h1>
+        <p>'.$hres["doctor's remarks"].'
        </p>
        </div>
     </div>
-    
+    ';
+    }
+      
+      ?>
 </body>
 </html>

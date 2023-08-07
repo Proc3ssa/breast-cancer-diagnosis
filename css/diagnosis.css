@@ -1,5 +1,6 @@
 body{
     background-color: white;
+    font-family: 'Montserrat';
 }
 
 .sidebar{
@@ -83,7 +84,8 @@ input[type='checkbox']{
     margin-bottom: 20px;
 }
 .symptoms{
-    width:40%;
+    width:100%;
+    
 }
 textarea{
     border-radius: 5px;
