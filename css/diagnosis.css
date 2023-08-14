@@ -80,6 +80,10 @@ fieldset{
     display: flex;
     justify-content: space-between;
 }
+#airesults textarea{
+    border:none;
+    background-color: transparent;
+}
 input[type='checkbox']{
     margin-bottom: 20px;
 }
@@ -97,7 +101,7 @@ textarea{
 textarea::placeholder{
     font-size: larger;
 }
-.below button{
+#button, .below button{
     background-color: #006A37;
     color: #FFF;
     border: none;
@@ -105,8 +109,16 @@ textarea::placeholder{
     height: 35px;
     margin-bottom: 20px;
     width:100px;
+    text-align: center;
+    
    }
-   .below button:hover{
+   #button p{
+    margin-top: 15px;
+   }
+   a{
+    text-decoration: none;
+   }
+   #button,.below button:hover{
        height: 36px; 
    }
 

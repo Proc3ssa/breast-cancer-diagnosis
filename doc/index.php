@@ -82,7 +82,7 @@ if(isset($_POST['signin'])){
       <div class="row">
         <div class="col-md-7">
           <div class="form_container">
-            <form action="">
+            <form action="#" method="POST">
              
               <div>
                 <input type="email" placeholder="Email" name="email" required />

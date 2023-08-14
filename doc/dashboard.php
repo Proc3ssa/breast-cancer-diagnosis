@@ -1,3 +1,41 @@
+<?php
+session_start();
+if(!isset($_SESSION['doctor'])){
+    header("location:index.php");
+}
+include "../connection.php";
+$doctor = $_SESSION['doctor'];
+
+function convert($date):string{
+
+    $new_date = date("d F, Y", strtotime($date));
+
+   return $new_date;
+}
+
+$QUERY = mysqli_query($connection, "SELECT name from doctors WHERE email = '$doctor'");
+
+$res = mysqli_fetch_assoc($QUERY);
+//patients fetch and search
+
+
+
+if(isset($_POST['search'])){
+    $patient = $_POST['patient'];
+    $primary_select = "SELECT firstname, email, lastname from patient where firstname LIKE '$patient%' or lastname LIKE '$patient%' or email LIKE '%$patient%'";
+
+    //echo $primary_select;
+}
+else{
+    $primary_select = "SELECT firstname, email, lastname FROM patient";
+}
+
+$primary_query = mysqli_query($connection, $primary_select);
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,15 +51,15 @@
                 <div class="image">
                     <img src="../images/avatar.png" alt="pateint">
                 </div>
-                <h3>Doctor</h3>
+                <h3><?php echo $res['name']?></h3>
             </div>
 
             <div class="menu">
                 <a href=""><div class="menu-item current">Patient  <div class="imag"><img src="../images/patient.svg" alt="" ></div> </div></a>
 
-                <a href=""><div class="menu-item ">Diagnosis  <div class="imag"><img src="../images/stethoscope.svg" alt="" ></div> </div></a>
+                <a href="diagnosis.php"><div class="menu-item ">Diagnosis  <div class="imag"><img src="../images/stethoscope.svg" alt="" ></div> </div></a>
 
-                <a href=""><div class="menu-item ">Appointments  <div class="imag"><img src="../images/calendar.svg" alt="" ></div> </div></a>
+                <a href="appointments.php"><div class="menu-item ">Appointments  <div class="imag"><img src="../images/calendar.svg" alt="" ></div> </div></a>
 
 
                 
@@ -33,77 +71,42 @@
 
     <div class="main">
        <div class="date">
-        <b>Sunday, 62nd April, 2034</b>
+        <b><?php echo convert(date("d-m-Y"))?></b>
        </div>
 
       
        <div class="below">
-        <form action="">
+        <form action="#" method="POST">
             
             <div class="search">
             <input type="search" name="patient" id="" placeholder="search for patients">
             </div>
 
             <div class="lense">
-            <button type="submit"><img src="../images/search.svg" alt=""></button>
+            <button type="submit" name="search"><img src="../images/search.svg" alt=""></button>
             </div>
             
         </form>
 
         <div class="patientss">
-            <a href="">
-            <div class="patient">
-                <div>
-                    <img src="../images/patientb.svg" alt="" style="color: aliceblue;">
-                </div>
-                
-                <b>Alice Tetteh</b>
-            </div></a>
-
-            <a href="">
-                <div class="patient">
-                    <div>
-                        <img src="../images/patientb.svg" alt="" style="color: aliceblue;">
-                    </div>
-                    
-                    <b>Alice Tetteh</b>
-                </div></a>
-
-                <a href="">
+            <?php
+                while($pf = mysqli_fetch_assoc($primary_query)){
+                    echo '
+                            <a href="patient.php?patient='.$pf['email'].'">
                     <div class="patient">
                         <div>
                             <img src="../images/patientb.svg" alt="" style="color: aliceblue;">
                         </div>
                         
-                        <b>Alice Tetteh</b>
+                        <b>'.$pf['firstname'].' '.$pf['lastname'].'</b>
                     </div></a>
+                    ';
 
-                    <a href="">
-                        <div class="patient">
-                            <div>
-                                <img src="../images/patientb.svg" alt="" style="color: aliceblue;">
-                            </div>
-                            
-                            <b>Alice Tetteh</b>
-                        </div></a>
+                }
+            ?>
+            
 
-                        <a href="">
-                            <div class="patient">
-                                <div>
-                                    <img src="../images/patientb.svg" alt="" style="color: aliceblue;">
-                                </div>
-                                
-                                <b>Alice Tetteh</b>
-                            </div></a>
-
-                            <a href="">
-                                <div class="patient">
-                                    <div>
-                                        <img src="../images/patientb.svg" alt="" style="color: aliceblue;">
-                                    </div>
-                                    
-                                    <b>Alice Tetteh</b>
-                                </div></a>
+            
 
 
            

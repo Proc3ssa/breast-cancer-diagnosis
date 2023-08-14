@@ -19,6 +19,8 @@ body{
     text-align: center;
     margin-top: 15px;
     margin-bottom: 60px;
+    
+    
 }
 .patient h3{
     font-weight: bolder;
@@ -113,7 +115,8 @@ form{
    .patientss .patient{
     border: 1px solid #21C375;
     width:200px;
-    height: 200px;
+    min-height: fit-content;
+    padding: 5px;
     border-radius: 5px;
     box-shadow: 1px 3px 4px rgba(128, 128, 128, 0.574);
     float: left;

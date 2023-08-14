@@ -90,10 +90,11 @@ $prostateCancerSymptoms = array(
 );
 
 
-if(isset($_POST['diagnose'])){
+if(isset($_POST['submit'])){
 
     $symptoms = array();
     $symptom2 = $_POST['othersymptoms'];
+    $department = $_POST['department'];
     for($i = 1; $i<=18; $i++){
         if(isset($_POST['symptom'.$i])){
             array_push($symptoms,$_POST['symptom'.$i]);
@@ -105,7 +106,18 @@ if(isset($_POST['diagnose'])){
 
    $allsymps = $symps.'and'.$symptom2;
 
+   //chatgpt api key
    $apiKey = "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";
+
+   $date = date("Y-m-d");
+   $time = date("h:ia");
+   $aiResults = "";
+   $remarks = "";
+   $id = "diag".date("yimshd");
+
+   $INSERT = "INSERT into diagnosis values ('$id','$date','$time','$patient','$department','$allsymps','$aiResults','$remarks') ";
+
+   $Dquery = mysqli_query($connection, $INSERT);
 
 }
 
@@ -119,6 +131,11 @@ if(isset($_POST['diagnose'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/diagnosis.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <script src="../js/custom.js">
+        
+
+    </script>
     <title>Diagnosis</title>
 </head>
 <body>
@@ -147,14 +164,14 @@ if(isset($_POST['diagnose'])){
 
        <?php
             if($res['gender'] == "Male"){
-                $type = "PROSTATE CANCER";
+                $type = "Prostate Cancer Care";
             }
             else{
-                $type = "BREAST CANCER";
+                $type = "Breast Cancer Care";
             }        ?>
       
        <div class="below">
-       <h1><?php echo $res['firstname']." ".$res['firstname'] ?></h1>
+       <h1><?php echo $res['firstname']." ".$res['lastname'] ?></h1>
        <b>New Diagnosis-</b><b style="color: red;"><?php echo $type ?></b>
 
        <fieldset>
@@ -189,19 +206,19 @@ if(isset($_POST['diagnose'])){
 
        <textarea name="othersymptoms" id="" cols="30" rows="10" value="other"  placeholder="write other symptoms"></textarea>
 
-       <button type="submit" name="diagnose">Submit</button>
+       <input type="hidden" name="department" value="<?php echo $type ?>">
+
+       <a href="diagnosis.php#airesults"><div id="button" type="" onClick = "diagnose()" name="diagnose"><p>Diagnose</p></div></a>
+
+       <fieldset id="airesults" style="border-color: red; display:block">
+        <legend>A.I results</legend>
+        <textarea name="airesults" id="airesults" cols="30" rows="10" value="other"  placeholder="ai">
+        </textarea>
+       </fieldset>
+
+       <button type="submit" name="submit">Submit</button>
 
         </form>
-
-       <fieldset style="border-color: red; display:block">
-        <legend>A.I results</legend>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, harum consequatur nobis quia fugiat commodi suscipit asperiores cumque illo similique odio officia maiores aliquam doloremque laborum doloribus placeat earum consectetur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione earum deserunt delectus animi nihil distinctio nostrum error repellendus fugiat expedita, commodi id quas totam optio saepe ad accusamus rem molestias.
-        Nobis atque delectus sit odit esse ratione repudiandae eveniet commodi eligendi id natus veniam eum nesciunt ad, exercitationem perspiciatis ullam, autem in. Est delectus officia illo consequuntur optio voluptatibus tenetur.
-        
-        
-       </p><p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita cum consectetur repellat explicabo quis vel, eum laudantium quod ipsa nostrum aliquam minima odit voluptatem aliquid blanditiis? Perspiciatis laudantium sit eum?
-            </p>
-       </fieldset>
 
        </div>
 

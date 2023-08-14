@@ -47,6 +47,11 @@ if(isset($_POST['contact'])){
       ';
   }
 }
+
+//doctors
+$DocSelect = "SELECT name, email FROM doctors";
+$DocQuery = mysqli_query($connection, $DocSelect);
+
 ?>
 
 <!DOCTYPE html>
@@ -316,15 +321,21 @@ if(isset($_POST['contact'])){
               <div class="form-group col-lg-4">
                 <label for="inputDoctorName">Doctor's Name</label>
                 <select name="doctor" class="form-control wide" id="inputDoctorName" required>
-                  <option >--select--- </option>
-                  <option value="Dr. Faisal Halid " required>Dr. Faisal Halid </option>
-                  <option value="Dr. Faisal Halid " required>Scott </option>
+                  <option value="">--select--- </option>
+                  <?php
+
+                  while($docRes = mysqli_fetch_assoc($DocQuery)){
+                    echo '
+                  <option value="'.$docRes['email'].'" required>'.$docRes['name'].'</option>
+                 
+                  ';}
+                  ?>
                 </select>
               </div>
               <div class="form-group col-lg-4">
                 <label for="inputDepartmentName">Department's Name</label>
                 <select name="department" class="form-control wide" id="inputDepartmentName" required>
-                <option >--select--- </option>
+                <option value="">--select--- </option>
                   <option value="Breast Cancer " required>Breast Cancer </option>
                   <option value="Prostate Cancer " required>Prostate Cancer </option>
                 </select>

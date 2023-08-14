@@ -52,3 +52,20 @@ alert();
     message.style.display = "none";
     
 }
+
+function cancel(id){
+    if (confirm("Are you sure you want to cancel this appointment?")) {
+        alert(1);
+    }
+
+    alert(1);
+}
+
+function diagnose(){
+    alert("diagnose active");
+    for(var i = 1; i<=18; i++){
+    var checkbox = "checkbox";
+    var one = chechbox + i;
+    one = document.getElementById("checkbox"+i);
+    }
+ }
