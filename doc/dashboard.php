@@ -13,21 +13,27 @@ function convert($date):string{
    return $new_date;
 }
 
-$QUERY = mysqli_query($connection, "SELECT name from doctors WHERE email = '$doctor'");
+$QUERY = mysqli_query($connection, "SELECT name, department from doctors WHERE email = '$doctor'");
 
 $res = mysqli_fetch_assoc($QUERY);
+if($res['department'] == 'Prostate Cancer Care'){
+    $gendar = "Male";
+}
+else{
+    $gendar = "Female";
+}
 //patients fetch and search
 
 
 
 if(isset($_POST['search'])){
     $patient = $_POST['patient'];
-    $primary_select = "SELECT firstname, email, lastname from patient where firstname LIKE '$patient%' or lastname LIKE '$patient%' or email LIKE '%$patient%'";
+    $primary_select = "SELECT firstname, email, lastname from patient where firstname LIKE '$patient%' or lastname LIKE '$patient%' or email LIKE '%$patient%' and gender = '$gendar'";
 
     //echo $primary_select;
 }
 else{
-    $primary_select = "SELECT firstname, email, lastname FROM patient";
+    $primary_select = "SELECT firstname, email, lastname FROM patient where gender = '$gendar'";
 }
 
 $primary_query = mysqli_query($connection, $primary_select);

@@ -90,24 +90,27 @@ else{
        <div class="xray">
         
         <div class="xraybox">
-            <img src="scan/'.$hres["scan"].'" alt="xray">
+            <img src="'.$hres["scan"].'" alt="xray">
         </div>
 
 
         <div class="xraydata">
+        <p><b>Date:</b>'.$hres["date"].'</p>
+        <p><b>Time:</b>'.$hres["times"].'</p>
             <p>'.$hres["result"].'</p>
         </div>
        </div>
 
        <div class="remarks">
         <h1>Doctors remarks</h1>
-        <p>'.$hres["doctor's remarks"].'
+        <p>'.$hres["doctorsremarks"].'
        </p>
+       <hr>
        </div>
-    </div>
+    
     ';
     }
       
-      ?>
+      ?></div>
 </body>
 </html>

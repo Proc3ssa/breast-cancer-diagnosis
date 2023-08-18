@@ -29,10 +29,39 @@ $primary_select = "SELECT *FROM patient WHERE email = '$patient'";
 $primary_query = mysqli_query($connection, $primary_select);
 $pf = mysqli_fetch_assoc($primary_query);
 
+//health fetch
+$hSELECT = "SELECT *FROM myhealth where patient = '$patient'";
+$hQUERY = mysqli_query($connection, $hSELECT);
+
+//
+//remarks
+if(isset($_POST['remarks'])){
+    $remarks = $_POST['docremarks'];
+    $scan = $_POST['scan'];
+
+    $query = mysqli_query($connection, "UPDATE myhealth SET doctorsremarks = '$remarks' where scan = '$scan'");
+
+    if($query){
+        echo '<script>alert("remarks added")</script>';
+    }
+    else{
+        echo '<script>alert("error adding remarks, try again after some time")</script>';
+    }
+    
+}
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    
+    if(window.history.replaceState){
+        window.history.replaceState(null,null,window.location.href);
+    }
+
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,24 +123,37 @@ $pf = mysqli_fetch_assoc($primary_query);
        </div>
 
        <!-- x-ray -->
-    <h1 style="margin-left: 10px; margin-top:50px;">X-ray</h1>
+       <?php 
+      while( $hres = mysqli_fetch_assoc($hQUERY)){
+        echo '
+      
+    <h1 style="margin-left: 10px; margin-top:50px;">'.$hres["scantype"].'</h1>
        <div class="xray">
         
         <div class="xraybox">
-
+            <img src="'.$hres["scan"].'" alt="xray">
         </div>
 
 
         <div class="xraydata">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam velit aperiam repudiandae, accusantium aut repellendus, quam error consequuntur expedita culpa sequi similique! Sunt inventore rerum voluptatum harum, nemo temporibus quas.</p>
+        <p><b>Date:</b>'.$hres["date"].'</p>
+        <p><b>Time:</b>'.$hres["times"].'</p>
+            <p>'.$hres["result"].'</p>
         </div>
        </div>
 
+  <form action="#" method="POST">
+    <input name="scan" type="hidden" value="'.$hres["scan"].'">
        <div class="remarks">
-        <h1>Doctor's remarks</h1>
-       <textarea name="" id="" cols="30" rows="10" placeholder="write your remarks"></textarea>
-       <button>Add Remarks</button>
+        <h1>Doctor"s remarks</h1>
+       <input type="text" value="'.$hres["doctorsremarks"].'" required name="docremarks" id="" cols="30" rows="10" placeholder="write your remarks">
+       <button name="remarks" type="submit">Add Remarks</button>
        </div>
+      </form>
+      '
+      ;}
+
+       ?>
     </div>
     
 </body>

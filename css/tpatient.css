@@ -13,10 +13,6 @@ body{
     top:0;
     left:0;
 }
-.xraybox img{
-    width:100%;
-    height:100%;
-}
 
 .patient{
     width: 100%;
@@ -134,28 +130,58 @@ hr{
     padding: 5px;
     
 }
-.remarks{
-    width: 98%;
-    margin: auto;
-}
-input[type="text"]{
-    border:1px solid gray;
+
+fieldset{
+    width:30%;
+    margin: 40px;
     border-radius: 5px;
-    margin-top: 20px;
-    width: 100%;
-    height:150px;
-    background-color: aliceblue;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
     
 }
-input[type="text"]::placeholder{
-    font-size: larger;
+fieldset div{
+    width:100%;
+    height:fit-content;
+    padding:10px;
 }
 button{
     background-color: rgba(13, 131, 74,1);
     border:none;
     border-radius: 5px;
     height: 35px;
-    width:130px;
+    width:80%;
     color: white;
+    margin-top: 10px;
    }
+
+   label[for='select'],label[for='date'],label[for='time'],  label[for='scan']{
+    border:1px solid gray;
+    border-radius: 5px 0 0 5px;
+    padding: 3px;
+    border-right-color: transparent;
+    margin-top: 10px;
+    width:100px;
+   }
+
+   select, input[type="date"], input[type="time"],input[type="file"]{
+    width:150px;
+    height:28px;
+    border: none;
+    border:1px solid gray;
+    border-left-color: transparent;
+    border-radius:  0  5px 5px 0 ;
+    margin-left: -6px;
+   }
+   textarea{
+    margin-top: 20px;
+    width:80%;
+    height: 150px;
+    border-radius: 5px;
+   }
+
+   .xray img{
+  width:100%;
+  height:100%
+   }
+   

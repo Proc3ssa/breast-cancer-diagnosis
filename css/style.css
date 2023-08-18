@@ -1177,3 +1177,49 @@ input[type="number"]{
   color: red;
   height: 20px;
 }
+/* PARASITE */
+
+.statistics{
+  
+  width:85%;
+  height:fit-content;
+  padding:20px;
+  margin:30px auto;
+  text-align: center;
+}
+.statistics .data{
+  margin-top: 70px;
+  
+  width:100%;
+  max-height:fit-content;
+  height:fit-content
+  
+}
+.overall{
+
+  width:98%;
+  height:400px;
+  display:flex;
+  justify-content: space-around;
+  margin-bottom: 100px;
+}
+.overall h1{
+  text-align: center;
+}
+.statistics article{
+  width:50%;
+  height:fit-content;
+  text-align: left;
+}
+.statistics .graph{
+  border:1px solid yellow;
+  width:40%;
+  height:100%
+}
+.graph img{
+width:100%;
+height:100%;
+
+}
+
+

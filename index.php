@@ -91,6 +91,70 @@ $DocQuery = mysqli_query($connection, $DocSelect);
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script>
+
+google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawBarColors);
+google.charts.setOnLoadCallback(breastcancer);
+
+function drawBarColors() {
+      var data = google.visualization.arrayToDataTable([
+        ['Continent', 'Females', 'Males'],
+        ['Asia', 4482515, 5021195],
+        ['Africa', 633456, 475753],
+        ['North America', 1184860, 1372002],
+        ['Latin America and the caribbean', 750007, 720267],
+        ['Europe', 2058826, 2339617]
+      ]);
+
+      var options = {
+        title: 'World Cancer Statistics, 2023',
+        chartArea: {width: '50%'},
+        colors: ['#b0120a', '#ffab91'],
+        hAxis: {
+          title: 'Total Population',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'Continent'
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+
+    // 
+
+    function breastcancer() {
+      var data = google.visualization.arrayToDataTable([
+        ['Continent', 'cases', ''],
+        ['2015', 2389,0 ],
+        ['2016', 2545, 0],
+        ['2017', 2688, 0],
+        ['2018', 2784, 0],
+        ['2019', 2902, 0]
+      ]);
+
+      var options = {
+        title: 'Breast Cancer Diagnosis statistics in Ghana, 2015-2019',
+        chartArea: {width: '50%'},
+        colors: ['rgb(230, 0, 255)', '#ffab91'],
+        hAxis: {
+          title: 'Total cases',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'Years'
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('cancer'));
+      chart.draw(data, options);
+    }
+
+  </script>
+
 </head>
 
 <body>
@@ -102,22 +166,16 @@ $DocQuery = mysqli_query($connection, $DocSelect);
         <div class="container">
           <div class="contact_nav">
             <a href="">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              <span>
-                Call : +233 123455678990
-              </span>
+              
+              
             </a>
             <a href="">
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              <span>
-                Email : demo@gmail.com
-              </span>
+              
+              
             </a>
             <a href="">
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span>
-                Ghana
-              </span>
+              
+              
             </a>
           </div>
         </div>
@@ -130,9 +188,7 @@ $DocQuery = mysqli_query($connection, $DocSelect);
             </a>
 
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class=""> </span>
-            </button>
+            
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
@@ -301,7 +357,77 @@ $DocQuery = mysqli_query($connection, $DocSelect);
     </section>
     <!-- end slider section -->
   </div>
+   
+    <!-- //statistics -->
+  <div class="statistics">
 
+                <h1>STATISTICS OF CANCER IN GHANA</h1>
+
+      <div class="data">
+
+        <div class="overall">
+              <article>
+                <h1>Cancer</h1><br>
+                <p><b>WHAT IS CANCER? </b> Cancer is a large group of diseases that can start in almost any organ or tissue of the body when abnormal cells grow uncontrollably, go beyond their usual boundaries to invade adjoining parts of the body and/or spread to other organs. The latter process is called metastasizing and is a major cause of death from cancer. A neoplasm and malignant tumour are other common names for cancer.</p>
+
+                <p>
+                Cancer is the second leading cause of death globally, accounting for an estimated 9.6 million deaths, or one in six deaths, in 2018. Lung, prostate, colorectal, stomach and liver cancer are the most common types of cancer in men, while breast, colorectal, lung, cervical and thyroid cancer are the most common among women.
+                </p>
+                <em>source:<a href="https://www.who.int/health-topics/cancer#tab=tab_1">World Health Organization</a></em>
+
+               
+
+              </article>
+              
+              <div id="chart_div" class="graph">
+         
+              <p><em>source:<a href="https://www.who.int/health-topics/cancer#tab=tab_1">World Health Organization</a></em></p>
+              </div>
+
+        </div>
+
+        <!-- breast cancer -->
+
+        <div class="overall">
+              <article>
+                <h1>Breast Cancer</h1>
+                <p>
+                <b>Breast cancer</b> is a disease in which cells in the breast grow out of control. There are different kinds of breast cancer. The kind of breast cancer depends on which cells in the breast turn into cancer.
+                </p>
+
+  </p>Most breast cancers begin in the ducts or lobules. Breast cancer can spread outside the breast through blood vessels and lymph vessels. When breast cancer spreads to other parts of the body, it is said to have metastasized.
+                </p>
+
+                <p>Deaths caused by breast cancer have been on the rise. In 2019, Ghana registered over 2,900 total deaths due to breast cancer, increasing from the previous year. The number of breast cancer deaths peaked in 2019 as it kept an upward trend since 2000. That year, the number of breast cancer deaths reached 1,336</p>
+
+                <p><em>source:<a href="https://www.statista.com/statistics/1288411/number-of-deaths-from-breast-cancer-in-ghana/">Statista 2023</a></em></p>
+
+              </article>
+              
+              <div id="cancer" class="graph">
+
+              </div>
+
+        </div>
+
+        <!-- prostate cancer  -->
+
+        <div class="overall">
+              <article>
+                <h1>Prostate Cancer</h1>
+
+              </article>
+              
+              <div class="graph">
+
+              </div>
+
+        </div>
+
+      </div>        
+     
+
+  </div>
 
   <!-- book section -->
 

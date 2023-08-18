@@ -39,6 +39,13 @@ $primary_query = mysqli_query($connection, $primary_select);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+    
+    if(window.history.replaceState){
+        window.history.replaceState(null,null,window.location.href);
+    }
+
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/ddashboard.css">
