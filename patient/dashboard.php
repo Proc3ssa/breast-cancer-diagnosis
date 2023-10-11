@@ -20,6 +20,11 @@ else{
 
     $hSELECT = "SELECT *FROM myhealth where patient = '$patient'";
     $hQUERY = mysqli_query($connection, $hSELECT);
+
+    $notification = mysqli_query($connection, "SELECT *FROM notification WHERE user= '$patient'");
+     
+    $count = $notification -> num_rows;
+
    
 }
 ?>
@@ -46,6 +51,7 @@ else{
                 <a href="#"><div class="menu-item current">My Health</div></a>
                 <a href="diagnosis.php"><div class="menu-item">Diagnoses</div></a>
                 <a href="appointments.php"><div class="menu-item">Appointments</div></a>
+                <a href="goelocation.php"><div class="menu-item">Find hospitals</div></a>
             </div>
 
     </div>
@@ -53,7 +59,23 @@ else{
     <!-- main -->
 
     <div class="main">
-       <div class="date">
+       <div class="date" >
+        <div class="notification"><img src="../images/notification.svg"><div class="div" <?php if($count == 0){echo 'style="display:none"';}?>><?php echo $count ?> 
+          
+            <div class="dropdown-content">
+            <?php
+                while($nres = mysqli_fetch_assoc($notification)){
+                    echo '
+             <a>'.$nres['message'].'<a><hr><br>
+            
+            ';
+            }
+       ?>
+            </div>
+    
+        
+        </div>
+        </div>
         <b><?php echo convert(date('d-m-Y'))?></b>
        </div>
 

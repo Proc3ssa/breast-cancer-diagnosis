@@ -62,6 +62,7 @@ else{
                 <a href="dashboard.php"><div class="menu-item ">My Health</div></a>
                 <a href="diagnosis.php"><div class="menu-item">Diagnoses</div></a>
                 <a href=""><div class="menu-item current">Appointments</div></a>
+                <a href="goelocation.php"><div class="menu-item">Find hospitals</div></a>
             </div>
 
     </div>
@@ -101,6 +102,11 @@ else{
                     
                         $number = 0;
                     while( $apres = mysqli_fetch_assoc($apQUERY)){
+                        $doctor = $apres['doctor'];
+                        $docQuery = mysqli_query($connection, "SELECT name FROM doctors where email = '$doctor'");
+
+                        $res = mysqli_fetch_assoc($docQuery);
+
                         $number++;
                         echo '
                     
@@ -108,7 +114,7 @@ else{
                         <td>'.$number.'</td>
                         <td>'.$apres['data'].'</td>
                         <td>'.$apres['time'].'</td>
-                        <td>'.$apres['doctor'].'</td>
+                        <td>'.$res['name'].'</td>
                        
                       
 

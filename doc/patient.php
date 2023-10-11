@@ -10,6 +10,8 @@ if(!isset($_GET['patient'])){
 $patient = $_GET['patient'];
 
 include "../connection.php";
+include "../notification.php";
+$date = date("Y-m-d");
 $doctor = $_SESSION['doctor'];
 
 function convert($date):string{
@@ -38,10 +40,12 @@ $hQUERY = mysqli_query($connection, $hSELECT);
 if(isset($_POST['remarks'])){
     $remarks = $_POST['docremarks'];
     $scan = $_POST['scan'];
+    $scantype = $_POST['scantype'];
 
     $query = mysqli_query($connection, "UPDATE myhealth SET doctorsremarks = '$remarks' where scan = '$scan'");
 
     if($query){
+        notification($patient, "Your Doctor has remarked your $scantype results", $date);
         echo '<script>alert("remarks added")</script>';
     }
     else{
@@ -147,6 +151,8 @@ if(isset($_POST['remarks'])){
        <div class="remarks">
         <h1>Doctor"s remarks</h1>
        <input type="text" value="'.$hres["doctorsremarks"].'" required name="docremarks" id="" cols="30" rows="10" placeholder="write your remarks">
+
+       <input type="hidden" name="scantype" value="'.$hres["scantype"].'">
        <button name="remarks" type="submit">Add Remarks</button>
        </div>
       </form>

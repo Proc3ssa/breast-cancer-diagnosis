@@ -38,7 +38,9 @@ else{
 
 $primary_query = mysqli_query($connection, $primary_select);
 
-
+$notification = mysqli_query($connection, "SELECT *FROM notification WHERE user= '$doctor'");
+     
+    $count = $notification -> num_rows;
 
 ?>
 
@@ -77,6 +79,25 @@ $primary_query = mysqli_query($connection, $primary_select);
 
     <div class="main">
        <div class="date">
+
+       <!--  -->
+       <div class="notification"><img src="../images/notification.svg"><div class="div" <?php if($count == 0){echo 'style="display:none"';}?>><?php echo $count ?> 
+          
+          <div class="dropdown-content">
+          <?php
+              while($nres = mysqli_fetch_assoc($notification)){
+                  echo '
+           <a style="color:white" href="appointments.php">'.$nres['message'].'<a><hr><br>
+          
+          ';
+          }
+     ?>
+          </div>
+  
+      
+      </div>
+      </div>
+      <!--  -->
         <b><?php echo convert(date("d-m-Y"))?></b>
        </div>
 

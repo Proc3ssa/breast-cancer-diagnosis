@@ -151,6 +151,7 @@ if(isset($_POST['submit'])){
                 <a href="dashboard.php"><div class="menu-item ">My Health</div></a>
                 <a href=""><div class="menu-item current">Diagnoses</div></a>
                 <a href="appointments.php"><div class="menu-item ">Appointments</div></a>
+                <a href="goelocation.php"><div class="menu-item">Find hospitals</div></a>
             </div>
 
     </div>

@@ -1,5 +1,6 @@
 <?php
 include 'connection.php';
+include 'notification.php';
 
 if(isset($_POST['appt'])){
   $aptid = date("dmYsi");
@@ -14,6 +15,9 @@ if(isset($_POST['appt'])){
   $INSERT = "INSERT INTO appointments values('$aptid','$doctor','$department','$tel','$symptoms','$date','$email','$time')";
 
   if(mysqli_query($connection, $INSERT)){
+
+     notification($doctor, "You have an appointment", $date);
+
       echo '
       <script>alert("appointment made")</script>
       ';
@@ -194,22 +198,22 @@ function drawBarColors() {
               <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
                 <ul class="navbar-nav  ">
                   <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="about.html"> About</a>
+                    <a class="nav-link" href="#about"> About</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="treatment.html">Treatment</a>
+                    <a class="nav-link" href="#treatment">Treatment</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="doctor.html">Doctors</a>
+                    <a class="nav-link" href="#doctor">Doctors</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="testimonial.html">Testimonial</a>
+                    <a class="nav-link" href="#testimonial">Testimonial</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact Us</a>
+                    <a class="nav-link" href="#contact">Contact Us</a>
                   </li>
                 </ul>
               </div>
@@ -228,7 +232,7 @@ function drawBarColors() {
                 </a>
                 <form class="form-inline">
                   <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                    
                   </button>
                 </form>
               </div>
@@ -508,7 +512,7 @@ function drawBarColors() {
 
   <!-- about section -->
 
-  <section class="about_section">
+  <section class="about_section" id="about">
     <div class="container  ">
       <div class="row">
         <div class="col-md-6 ">
@@ -540,7 +544,7 @@ function drawBarColors() {
 
   <!-- treatment section -->
 
-  <section class="treatment_section layout_padding">
+  <section class="treatment_section layout_padding" id="treatment">
     <div class="side_img">
       <img src="images/treatment-side-img.jpg" alt="">
     </div>
@@ -597,7 +601,7 @@ function drawBarColors() {
 
   <!-- team section -->
 
-  <section class="team_section layout_padding">
+  <section class="team_section layout_padding" id="doctor">
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
@@ -642,7 +646,7 @@ function drawBarColors() {
               </div>
               <div class="detail-box">
                 <h5>
-                  Dr. Firdaus Mahmoud
+                  Dr. Firdaus Yakub
                 </h5>
                 <h6>
                   MBBS
@@ -702,7 +706,7 @@ function drawBarColors() {
 
 
   <!-- client section -->
-  <section class="client_section layout_padding">
+  <section class="client_section layout_padding" id="testimonial">
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -784,7 +788,7 @@ function drawBarColors() {
   <!-- end client section -->
 
   <!-- contact section -->
-  <section class="contact_section layout_padding-bottom">
+  <section class="contact_section layout_padding-bottom" id="contact">
     <div class="container" id="contact">
       <div class="heading_container">
         <h2>

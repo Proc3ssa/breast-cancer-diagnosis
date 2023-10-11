@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['doctor'])){
+if(!isset($_SESSION['technician'])){
     header("location:index.php");
 }
 
@@ -10,7 +10,8 @@ if(!isset($_GET['patient'])){
 $patient = $_GET['patient'];
 
 include "../connection.php";
-$doctor = $_SESSION['doctor'];
+include "../notification.php";
+$technician = $_SESSION['technician'];
 
 function convert($date):string{
 
@@ -19,7 +20,7 @@ function convert($date):string{
    return $new_date;
 }
 
-$QUERY = mysqli_query($connection, "SELECT name from doctors WHERE email = '$doctor'");
+$QUERY = mysqli_query($connection, "SELECT name from technicians WHERE email = '$technician'");
 
 $res = mysqli_fetch_assoc($QUERY);
 //patients fetch and search
@@ -50,7 +51,10 @@ if(isset($_POST['upload'])){
             $INSERT = "INSERT into myhealth values('$date', '$time','$patient', '$filDestination','$scanType', '$results', '')";
             //echo $INSERT;
             if(mysqli_query($connection, $INSERT)){
-               
+                $date = date("Y-m-d");
+                $message = "Your $scanType result is ready";
+                notification($patient, $message, $date);
+
                  echo '<script>alert("New data added")</script>';
             }
             else{

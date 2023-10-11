@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Geolocation and Maps</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+</head>
+<body>
+  <div id="map" style="height: 400px;"></div>
+  
+  <script>
+    // Initialize the map
+    function initMap() {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+            
+            const mapOptions = {
+              center: { lat: userLat, lng: userLng },
+              zoom: 15
+            };
+            
+            const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            
+            // Place a marker for the user's location
+            new google.maps.Marker({
+              position: { lat: userLat, lng: userLng },
+              map: map,
+              title: "Your Location"
+            });
+            
+            // Use the Places API to find nearby places (example)
+            const service = new google.maps.places.PlacesService(map);
+            service.nearbySearch(
+              {
+                location: { lat: userLat, lng: userLng },
+                radius: 1000, // in meters
+                type: "restaurant" // or other types of places
+              },
+              (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                  for (const place of results) {
+                    // Add markers for nearby places
+                    new google.maps.Marker({
+                      position: place.geometry.location,
+                      map: map,
+                      title: place.name
+                    });
+                  }
+                }
+              }
+            );
+          },
+          (error) => {
+            console.error("Error getting location:", error.message);
+          }
+        );
+      } else {
+        console.error("Geolocation is not available in this browser.");
+      }
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</body>
+</html>
