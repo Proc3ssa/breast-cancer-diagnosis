@@ -56,7 +56,7 @@ else{
             <div class="menu">
                 <a href="dashboard.php"><div class="menu-item ">My Health</div></a>
                 <a href="diagnosis.php"><div class="menu-item">Diagnoses</div></a>
-                <a href=""><div class="menu-item">Appointments</div></a>
+                <a href="appointments.php"><div class="menu-item">Appointments</div></a>
                 <a href="goelocation.php"><div class="menu-item current" class="menu-item">Find hospitals</div></a>
             </div>
 
@@ -66,10 +66,10 @@ else{
 
     <div class="main">
        <div class="date">
-        <b><?php echo convert(date('d-m-Y'))?></b>
+       <h1>Hospitals Near You</h1> <b><?php echo convert(date('d-m-Y'))?></b>
        </div>
 
-      <h1>Hospitals Near You</h1>
+      
 
       <div id="map"></div>
         

@@ -68,7 +68,7 @@ else{
 
                     if($nres['type'] == 'scan'){
                     echo '
-             <a href="dashboard.php?id='.$nres['id'].'#'.$nres['id'].'">'.$nres['message'].'<a><hr><br>
+             <a href="../notrout.php?id='.$nres['id'].'&type='.$nres['type'].'">'.$nres['message'].'<a><hr><br>
             
             ';
                     }
