@@ -65,10 +65,19 @@ else{
             <div class="dropdown-content">
             <?php
                 while($nres = mysqli_fetch_assoc($notification)){
+
+                    if($nres['type'] == 'scan'){
                     echo '
-             <a>'.$nres['message'].'<a><hr><br>
+             <a href="dashboard.php?id='.$nres['id'].'#'.$nres['id'].'">'.$nres['message'].'<a><hr><br>
             
             ';
+                    }
+                    else if($nres['type'] == 'appointment'){
+                        echo '
+                        <a href="appointments.php?id='.$nres['id'].'#'.$nres['id'].'">'.$nres['message'].'<a><hr><br>
+                       
+                       ';
+                    }
             }
        ?>
             </div>
@@ -109,9 +118,9 @@ else{
         echo '
       
     <h1 style="margin-left: 10px; margin-top:50px;">'.$hres["scantype"].'</h1>
-       <div class="xray">
+       <div class="xray" id="'.$hres["id"].'">
         
-        <div class="xraybox">
+        <div class="xraybox" >
             <img src="'.$hres["scan"].'" alt="xray">
         </div>
 

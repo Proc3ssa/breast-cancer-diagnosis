@@ -35,6 +35,7 @@ if(isset($_POST['upload'])){
  $date = $_POST['date'];
  $time = $_POST['time'];
  $results = $_POST['results'];
+ $id = date('msi');
 
  $scanimage = $_FILES['scanimage'];
         
@@ -48,12 +49,12 @@ if(isset($_POST['upload'])){
   
         if(move_uploaded_file($fileTempName,$filDestination)){
 
-            $INSERT = "INSERT into myhealth values('$date', '$time','$patient', '$filDestination','$scanType', '$results', '')";
+            $INSERT = "INSERT into myhealth values($id, '$date', '$time','$patient', '$filDestination','$scanType', '$results', '')";
             //echo $INSERT;
             if(mysqli_query($connection, $INSERT)){
                 $date = date("Y-m-d");
                 $message = "Your $scanType result is ready";
-                notification($patient, $message, $date);
+                notification($id, 'scan', $patient, $message, $date);
 
                  echo '<script>alert("New data added")</script>';
             }

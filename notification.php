@@ -1,7 +1,7 @@
 <?php
-function notification($user, $message, $date){
+function notification($id, $type, $user, $message, $date){
 include "connection.php";
 
-mysqli_query($connection, "INSERT INTO notification VALUES('$user','$message', '$date')");
+mysqli_query($connection, "INSERT INTO notification VALUES($id, '$type', '$user','$message', '$date')");
 
 }
