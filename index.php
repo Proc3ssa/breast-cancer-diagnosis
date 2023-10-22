@@ -70,7 +70,7 @@ $DocQuery = mysqli_query($connection, $DocSelect);
   <!-- Site Metas -->
   <meta name="keywords" content="" />
   <meta name="description" content="" />
-  <meta name="author" content="" />
+  <meta name="author" content="processor" />
 
   <title>Cancer diagnosis</title>
 

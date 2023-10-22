@@ -76,7 +76,7 @@ else{
 
       
        <div class="below">
-        <a href="../index.php#appointments"><button>New appointment</button></a>
+        <a href="newappointment.php"><button>New appointment</button></a>
 
         <div class="table">
 
