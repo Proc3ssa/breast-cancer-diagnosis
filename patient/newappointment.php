@@ -46,10 +46,7 @@
               </div>
             </div>
             <div class="form-row ">
-              <div class="form-group col-lg-4">
-                <label for="inputPhone">Phone Number</label>
-                <input type="number" class="form-control" id="inputPhone" placeholder="XXXXXXXXXX" name="tel" required>
-              </div>
+              
               <div class="form-group col-lg-4">
                 <label for="inputSymptoms">Reason</label>
                 <input type="text" class="form-control" id="inputSymptoms" placeholder="just type one" name="symptoms" required>
@@ -87,10 +84,11 @@ include '../notification.php';
 
 if(isset($_POST['appt'])){
   $aptid = date("dmYsi");
-  $email = $_POST['patient'];
+  session_start();
+  $email = $_SESSION['patient'];
   $doctor = $_POST['doctor'];
   $department = $_POST['department'];
-  $tel = $_POST['tel'];
+  $tel = '122';
   $symptoms = $_POST['symptoms'];
   $date = $_POST['date'];
   $time = $_POST['time'];
@@ -99,13 +97,13 @@ if(isset($_POST['appt'])){
 
   if(mysqli_query($connection, $INSERT)){
 
-     notification($doctor, "You have an appointment", $date);
+     notification($aptid, "appointment",$doctor, "You have an appointment", $date);
 
       echo '
       <script>alert("appointment made")</script>
       ';
 
-      header("refresh:1;url=patient/appointments.php");
+      header("refresh:1;url=appointments.php");
   }
   else{
      echo '

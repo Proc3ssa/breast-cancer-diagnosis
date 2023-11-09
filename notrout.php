@@ -12,4 +12,8 @@ elseif($type == 'appointment'){
     echo '<script>window.location.href="patient/appointments.php";</script>';
 }
 
+elseif($type == 'remarks'){
+    echo '<script>window.location.href="patient/dashboard.php#'.$id.'";</script>';
+}
+
 ?>

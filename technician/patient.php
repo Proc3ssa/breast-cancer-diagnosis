@@ -202,7 +202,7 @@ $healthQuery = mysqli_query($connection,"SELECT *FROM myhealth WHERE patient = '
         <div class="xraydata">
             <p>
             <p><b>Date:</b>'.$hres['date'].'</p>
-            <p><b>Date:</b>'.$hres['times'].'</p>
+            <p><b>Time:</b>'.$hres['times'].'</p>
             <p>'.$hres['result'].'</p>
             
             </p>

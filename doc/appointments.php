@@ -36,33 +36,7 @@ $apQuery = mysqli_query($connection,$apSelect );
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/dappointments.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-    <script>
-
-function cancel(id,user){
-    if (confirm("Are you sure you want to cancel this appointment?")) {
-        
-        window.location.href = "deleteappointment.php?appointmentid="+id+"&user="+user;
-    }
-
-}
- function update(id,date1,time1){
-    var date;
-    var time;
-        if(confirm("You are about to reschedule an appointment. Leave the section empty if you wish not to change.")){
-          var date2 = prompt("Enter new date format("+date1+")");
-          var time2 = prompt("Enter new time format("+time1+")");
-
-          if date2 == "" ? date = date1 : date = date2;
-          if time2 == "" ? time = time1 : time = time2;
-
-          alert(date,time);
-
-
-        }
-    }
-
-
-    </script>
+    
     <title>Doctor | appointments</title>
 </head>
 <body>
@@ -112,9 +86,13 @@ function cancel(id,user){
 
             $patient = mysqli_fetch_assoc($patientQuery);
 
-            if($apRes['data'] < date("Y-m-a")){
+            if($apRes['data'] > date("Y-m-d")){
                 $status = "Upcoming";
                 $color = 'rgb(8, 154, 8)';
+            }
+            elseif($apRes['data'] == date("Y-m-d")){
+                $status = "Today";
+                $color = "RED";
             }
             else{
                 $status = "Past";
@@ -140,11 +118,11 @@ function cancel(id,user){
                     <b>Time: '.$apRes['time'].'am</b>
 
                     <div class="button">
-                        <button onClick="cancel('.$apRes['appointmentid'].',&quot;'.$apRes['patient'].'&quot;)">Cancel</button>
+                        <button onclick="cancel('.$apRes['appointmentid'].')">Cancel</button>
                     </div>
 
                     <div class="button">
-                        <button onClick="update('.$apRes['appointmentid'].',&quot;'.$apRes['data'].'&quot;,&quot;'.$apRes['time'].'&quot;)" style="background-color:rgb(4, 85, 4);">Reschedule</button>
+                        <a href="reschedule.php?date='.$apRes['data'].'&time='.$apRes['time'].'&id='.$apRes['appointmentid'].'"><button style="background-color:rgb(4, 85, 4);">Reschedule</button></a>
                     </div>
                 </div>
             </div>
@@ -162,4 +140,21 @@ function cancel(id,user){
     </div>
     
 </body>
+<script>
+    function cancel(id){
+  if(confirm("Are you sure you want to cancel this appointment?")){
+    window.location.href = "deleteappointment.php?appointmentid="+id;
+  }
+}
+
+
+
+
+
+       
+    
+        
+       
+    
+</script>
 </html>

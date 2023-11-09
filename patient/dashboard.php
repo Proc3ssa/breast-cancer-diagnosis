@@ -21,9 +21,11 @@ else{
     $hSELECT = "SELECT *FROM myhealth where patient = '$patient'";
     $hQUERY = mysqli_query($connection, $hSELECT);
 
-    $notification = mysqli_query($connection, "SELECT *FROM notification WHERE user= '$patient'");
+    $notification = mysqli_query($connection, "SELECT *FROM notification WHERE user = '$patient'");
      
     $count = $notification -> num_rows;
+
+
 
    
 }
@@ -74,7 +76,14 @@ else{
                     }
                     else if($nres['type'] == 'appointment'){
                         echo '
-                        <a href="appointments.php?id='.$nres['id'].'#'.$nres['id'].'">'.$nres['message'].'<a><hr><br>
+                        <a href="../notrout.php?id='.$nres['id'].'&type='.$nres['type'].'">'.$nres['message'].'<a><hr><br>
+                       
+                       ';
+                    }
+
+                    else if($nres['type'] == 'remarks'){
+                        echo '
+                        <a href="../notrout.php?id='.$nres['id'].'&type='.$nres['type'].'">'.$nres['message'].'<a><hr><br>
                        
                        ';
                     }

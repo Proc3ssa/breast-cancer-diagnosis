@@ -41,11 +41,12 @@ if(isset($_POST['remarks'])){
     $remarks = $_POST['docremarks'];
     $scan = $_POST['scan'];
     $scantype = $_POST['scantype'];
+    $apid = date('msi');
 
     $query = mysqli_query($connection, "UPDATE myhealth SET doctorsremarks = '$remarks' where scan = '$scan'");
 
     if($query){
-        notification($patient, "Your Doctor has remarked your $scantype results", $date);
+        notification($apid, 'remarks', $patient, "Your Doctor has remarked your $scantype results", $date);
         echo '<script>alert("remarks added")</script>';
     }
     else{
